@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="3dp"
+    app:cardUseCompatPadding="true"
+    app:cardElevation="3dp"
+    android:clickable="true"
+    android:focusable="true"
+
+    android:foreground="?android:attr/selectableItemBackground"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Title"
+            android:id="@+id/goodsName"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/goodsCode"
+            android:text="Some other text"
+            android:layout_below="@+id/goodsName"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/goodsArticle"
+            android:text="Some other text"
+            android:layout_below="@+id/goodsCode"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/goodsInpack"
+            android:text="Some other text"
+            android:layout_below="@+id/goodsArticle"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
