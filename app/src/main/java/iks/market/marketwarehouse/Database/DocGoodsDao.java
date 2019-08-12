@@ -12,6 +12,7 @@ import java.util.List;
 public interface DocGoodsDao {
     @Query("Select * from DocGoods")
     List<DocGoods> getDocumentsGoodList();
+
     @Insert
     void insertGoods(DocGoods docGoods);
     @Update

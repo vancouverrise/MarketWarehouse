@@ -14,11 +14,18 @@ public interface DocumentBodyDao {
     List<DocBody> getDocBodyList();
     @Query("SELECT * FROM DocBody WHERE docnumber LIKE :id")
     List<DocBody> getBodyByNumber(String id);
+    @Query("SELECT * FROM DocBody WHERE barcode LIKE :barcode AND docnumber LIKE :number")
+    List<DocBody> getGoodsByBarcode(String barcode, String number);
+    @Query("SELECT * FROM DocBody WHERE code LIKE :article")
+    List<DocBody> getGoodsByArticle(String article);
     @Insert
     void insertDocuments(DocBody docBody);
     @Update
     void updateDocuments(DocBody docBody);
     @Delete
     void deleteDocuments(DocBody docBody);
+    @Query("UPDATE DocBody SET qty=qty+ :number WHERE barcode LIKE :barcode")
+    void updateQuantity(String barcode, int number);
+
 
 }

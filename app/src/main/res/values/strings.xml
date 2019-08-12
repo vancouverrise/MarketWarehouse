@@ -3,4 +3,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="scanned">Отсканированно:</string>
+    <string name="quantity">Количество:</string>
+    <string name="goods">Товар:</string>
+    <string name="masks">Маски</string>
+    <string name="prosmotr">Просмотр</string>
+    <string name="add">Добавить</string>
+    <string name="barcodes">Штрихкоды</string>
 </resources>

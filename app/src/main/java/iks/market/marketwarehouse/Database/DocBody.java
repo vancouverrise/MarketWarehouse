@@ -15,14 +15,14 @@ public class DocBody {
     public String barcode;
     @NonNull
     public String inpack;
-    @ColumnInfo(name = "NAME")
+    @ColumnInfo(name = "name")
     public String name;
-    @ColumnInfo(name = "QTY")
-    public String qty;
-    @ColumnInfo(name = "QTYPREDICT")
+    @ColumnInfo(name = "qty")
+    public int qty;
+    @ColumnInfo(name = "qtypredict")
     public String qtypredict;
 
-    public DocBody(String docnumber, String code, String barcode, String inpack, String name, String qty, String qtypredict){
+    public DocBody(String docnumber, String code, String barcode, String inpack, String name, int qty, String qtypredict){
 
         this.docnumber = docnumber;
         this.code = code;

@@ -10,14 +10,13 @@
         android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:insetBottom="6dp"
         android:text="Расхожден."
         app:layout_constraintEnd_toStartOf="@+id/_viewButton"
         app:layout_constraintHorizontal_bias="0.76"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
         android:id="@+id/barcode_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
@@ -25,19 +24,19 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:hint="Barcode"
+        android:imeOptions="actionDone"
+        android:nextFocusDown="@id/barcode_layout"
+        android:maxLines="1"
+        android:minLines="1"
+        android:lines="1"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/_resetButton">
+    </EditText>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputBarcode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
         android:id="@+id/article_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
@@ -45,23 +44,26 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:hint="Article"
+        android:nextFocusDown="@id/article_layout"
+        android:maxLines="1"
+        android:minLines="1"
+        android:lines="1"
+        android:inputType="number"
+        android:imeOptions="actionDone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/barcode_layout">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputArticle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+
+    </EditText>
 
     <Button
         android:id="@+id/_barcodesButton"
         android:layout_width="148dp"
         android:layout_height="wrap_content"
-        android:text="Штрих-коды"
+        android:text="@string/barcodes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/_masksButton"
@@ -71,7 +73,7 @@
         android:id="@+id/_addGoodsButton"
         android:layout_width="304dp"
         android:layout_height="wrap_content"
-        android:text="Добавить"
+        android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -82,7 +84,7 @@
         android:layout_width="148dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Просмотр"
+        android:text="@string/prosmotr"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/_differenceButton"
@@ -102,7 +104,7 @@
         android:id="@+id/_masksButton"
         android:layout_width="148dp"
         android:layout_height="wrap_content"
-        android:text="Маски"
+        android:text="@string/masks"
         app:layout_constraintEnd_toStartOf="@+id/_barcodesButton"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,6 +119,48 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/_resetButton"
         app:layout_constraintTop_toBottomOf="@+id/_barcodesButton" />
+
+    <TextView
+        android:id="@+id/_goods_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/goods"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/article_layout" />
+
+    <TextView
+        android:id="@+id/_quantity_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="Введено:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/_goods_textview" />
+
+    <TextView
+        android:id="@+id/_predict_quantity_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="Упак | Учёт:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/_quantity_textview" />
+
+    <NumberPicker
+        android:id="@+id/numberPicker"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/_addGoodsButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/_predict_quantity_textview" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

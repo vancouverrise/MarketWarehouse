@@ -3,12 +3,11 @@ package iks.market.marketwarehouse;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.android.material.button.MaterialButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +15,12 @@ import java.util.Random;
 
 import iks.market.marketwarehouse.Database.DocHeader;
 import iks.market.marketwarehouse.Database.DocumentsDatabase;
-import iks.market.marketwarehouse.Views.DocumentsListModel;
 import iks.market.marketwarehouse.Views.DocumentsListAdapter;
+import iks.market.marketwarehouse.Views.DocumentsListModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    MaterialButton buttonAdd, buttonSearch;
+    Button buttonAdd, buttonSearch;
     RecyclerView recyclerView;
     DocumentsListAdapter documentsListAdapter;
     Context context;
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 n += 1;
                 int b = random.nextInt(15000);
                 b += 1;
-                DocHeader docHeader = new DocHeader(String.valueOf(n), String.valueOf(b), "Рандом компания", "Подсчет склада");
+                DocHeader docHeader = new DocHeader("102", String.valueOf(b), "Рандом компания", "Подсчет склада");
                 documentsDatabase.docHeaderDao().insertDocuments(docHeader);
 
             }
