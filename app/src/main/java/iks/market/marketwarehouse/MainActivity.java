@@ -2,9 +2,12 @@ package iks.market.marketwarehouse;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ShowDialog();
             }});
 
 
@@ -82,5 +85,33 @@ public class MainActivity extends AppCompatActivity {
         }
         System.out.println("Size" + tempheader.size());
         return othermodels;
+    }
+
+    public void ShowDialog(){
+        final AlertDialog dialogBuilder = new AlertDialog.Builder(this).create();
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.addnewdocument, null);
+
+        final EditText editText = dialogView.findViewById(R.id.edt_comment);
+        Button button1 = dialogView.findViewById(R.id.buttonSubmit);
+        Button button2 = dialogView.findViewById(R.id.buttonCancel);
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogBuilder.dismiss();
+            }
+        });
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // DO SOMETHINGS
+                dialogBuilder.dismiss();
+            }
+        });
+
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.show();
+
     }
 }

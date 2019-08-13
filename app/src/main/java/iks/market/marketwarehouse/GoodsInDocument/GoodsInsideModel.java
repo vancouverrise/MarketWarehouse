@@ -1,7 +1,7 @@
 package iks.market.marketwarehouse.GoodsInDocument;
 
 public class GoodsInsideModel {
-    private String name, barcode, article, inpack;
+    private String name, barcode, article, inpack, qty, qtyPredict;
 
     public String getInpack() {
         return inpack;
@@ -33,5 +33,21 @@ public class GoodsInsideModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getQtyPredict() {
+        return qtyPredict;
+    }
+
+    public void setQtyPredict(String qtyPredict) {
+        this.qtyPredict = qtyPredict;
+    }
+
+    public String getQty() {
+        return qty;
+    }
+
+    public void setQty(String qty) {
+        this.qty = qty;
     }
 }

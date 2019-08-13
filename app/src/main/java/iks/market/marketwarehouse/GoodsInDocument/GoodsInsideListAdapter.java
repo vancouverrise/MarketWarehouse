@@ -36,6 +36,8 @@ public class GoodsInsideListAdapter extends RecyclerView.Adapter<GoodsInsideList
         holder.article.setText(stuff.get(position).getArticle());
         holder.barcode.setText(stuff.get(position).getBarcode());
         holder.inpack.setText(stuff.get(position).getInpack());
+        holder.qty.setText(stuff.get(position).getQty());
+        holder.qtypredict.setText(stuff.get(position).getQtyPredict());
     }
 
     @Override

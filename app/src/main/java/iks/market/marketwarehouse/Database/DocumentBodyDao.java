@@ -12,6 +12,8 @@ import java.util.List;
 public interface DocumentBodyDao {
     @Query("Select * from DocBody")
     List<DocBody> getDocBodyList();
+    @Query("Select * from DocBody WHERE qty != qtypredict")
+    List<DocBody> getDocBodyListDifference();
     @Query("SELECT * FROM DocBody WHERE docnumber LIKE :id")
     List<DocBody> getBodyByNumber(String id);
     @Query("SELECT * FROM DocBody WHERE barcode LIKE :barcode AND docnumber LIKE :number")

@@ -10,7 +10,7 @@ import iks.market.marketwarehouse.R;
 
 public class GoodsInsideListHolder extends RecyclerView.ViewHolder {
 
-    TextView name, barcode, article, inpack;
+    TextView name, barcode, article, inpack, qty, qtypredict;
 
 
     public GoodsInsideListHolder(@NonNull View itemView) {
@@ -19,6 +19,8 @@ public class GoodsInsideListHolder extends RecyclerView.ViewHolder {
         this.barcode = itemView.findViewById(R.id.goodsBarcodeList);
         this.article = itemView.findViewById(R.id.goodsArticleList);
         this.inpack = itemView.findViewById(R.id.goodsInpackList);
+        this.qty = itemView.findViewById(R.id.goodsQtyScannedList);
+        this.qtypredict = itemView.findViewById(R.id.goodsQtyPredictList);
 
     }
 }

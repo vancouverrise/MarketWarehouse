@@ -20,9 +20,9 @@ public class DocBody {
     @ColumnInfo(name = "qty")
     public int qty;
     @ColumnInfo(name = "qtypredict")
-    public String qtypredict;
+    public int qtypredict;
 
-    public DocBody(String docnumber, String code, String barcode, String inpack, String name, int qty, String qtypredict){
+    public DocBody(String docnumber, String code, String barcode, String inpack, String name, int qty, int qtypredict){
 
         this.docnumber = docnumber;
         this.code = code;

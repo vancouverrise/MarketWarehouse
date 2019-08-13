@@ -38,6 +38,18 @@
             android:id="@+id/goodsInpackList"
             android:text="Some other text"
             android:layout_below="@+id/goodsArticleList"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/goodsQtyScannedList"
+            android:text="Someothertext"
+            android:layout_below="@id/goodsInpackList"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/goodsQtyPredictList"
+            android:text="Someothertext"
+            android:layout_below="@id/goodsQtyScannedList"/>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
