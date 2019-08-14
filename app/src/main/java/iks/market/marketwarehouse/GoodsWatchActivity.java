@@ -15,7 +15,7 @@ import iks.market.marketwarehouse.Database.DocumentsDatabase;
 import iks.market.marketwarehouse.Views.GoodsListAdapter;
 import iks.market.marketwarehouse.Views.GoodsListModel;
 
-public class GoodsWatchActivity extends AppCompatActivity {
+public class  GoodsWatchActivity extends AppCompatActivity {
 
     RecyclerView recyclerGoods;
     GoodsListAdapter goodsListAdapter;
@@ -45,7 +45,7 @@ public class GoodsWatchActivity extends AppCompatActivity {
         if (tempheader.size() > 0){
             for (int i = 0; i < tempheader.size(); i++) {
                 goodsListModel = new GoodsListModel();
-                goodsListModel.setCode("Название: " + tempheader.get(i).code);
+                goodsListModel.setCode("Название:1 " + tempheader.get(i).code);
                 goodsListModel.setBarcode("Артикул: " +tempheader.get(i).barcode);
                 goodsListModel.setName("Код: " + tempheader.get(i).name);
                 goodsListModel.setInpack("Кол-во упк: " + tempheader.get(i).inpack);

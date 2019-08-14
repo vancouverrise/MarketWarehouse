@@ -34,4 +34,5 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
     implementation 'de.siegmar:fastcsv:1.0.3'
     implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.6'
+
 }

@@ -18,5 +18,7 @@ public interface DocHeaderDao {
     void updateDocuments(DocHeader docHeader);
     @Delete
     void deleteDocuments(DocHeader docHeader);
+    @Query("DELETE from DocHeader WHERE documentnumber LIKE :id")
+    void deleteHeader(String id);
 
 }

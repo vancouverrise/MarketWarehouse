@@ -13,7 +13,6 @@ import java.util.List;
 public interface DocGoodsDao {
     @Query("Select * from DocGoods")
     List<DocGoods> getDocumentsGoodList();
-
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     void insertGoods(DocGoods docGoods);
     @Update

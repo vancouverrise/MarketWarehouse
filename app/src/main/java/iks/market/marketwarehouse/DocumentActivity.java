@@ -1,12 +1,9 @@
 package iks.market.marketwarehouse;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
@@ -26,7 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -45,7 +41,7 @@ public class DocumentActivity extends AppCompatActivity {
     String _TempDocumentString;
     Context c;
     DocGoods docGoods;
-    DocBody docBody, docBodyInsert;
+    DocBody docBody;
     DocumentsDatabase documentsDatabase;
     TextView goodname, quantity, inpackUchet;
     NumberPicker numberPicker;
@@ -58,7 +54,7 @@ public class DocumentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document);
-        //Context
+
 
         c = getApplicationContext();
         numberPicker = findViewById(R.id.numberPicker);
@@ -100,6 +96,8 @@ public class DocumentActivity extends AppCompatActivity {
             _TempDocumentString = _TempDocumentString.replace("#", "");
         }
 
+        System.out.println("Номер документа: "+ _TempDocumentString);
+
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -117,7 +115,7 @@ public class DocumentActivity extends AppCompatActivity {
                     if (query_fetch != null && query_fetch.size() != 0) {
 
                         System.out.println("Размер массива кнопки" + query_fetch.size());
-                        documentsDatabase.docBodyDao().updateQuantity(query_fetch.get(0).barcode, numberPicker.getValue());
+                        documentsDatabase.docBodyDao().updateQuantity(query_fetch.get(0).barcode, numberPicker.getValue(), _TempDocumentString);
                         FancyToast.makeText(c, "Добавленно", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
                         query_fetch = documentsDatabase.docBodyDao().getGoodsByBarcode(barcode.getText().toString(), _TempDocumentString);
                         goodname.setText(String.format("Товар: %s", query_fetch.get(0).name));
@@ -129,7 +127,17 @@ public class DocumentActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     System.out.println(e);
                 }
+            }
+        });
 
+        viewDocBarcodesDiff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("difference", "false");
+                bundle.putString("docnumber", _TempDocumentString);
+                documentGoodsActivity.putExtras(bundle);
+                startActivity(documentGoodsActivity);
 
             }
         });
@@ -138,9 +146,10 @@ public class DocumentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                bundle.putString("difference", "false");
-                documentGoodsActivity.putExtras(bundle);
-                startActivity(documentGoodsActivity);
+                bundle.putString("difference", "true");
+                bundle.putString("docnumber", _TempDocumentString);
+                documentDifferrence.putExtras(bundle);
+                startActivity(documentDifferrence);
             }
         });
 
@@ -148,8 +157,8 @@ public class DocumentActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(DocumentActivity.this);
-                builder.setTitle("Импорт / Экспорт")
-                        .setMessage("Выбирите функцию")
+                builder.setTitle("Импорт")
+                        .setMessage("Импорт товаров в документ из файла docs.txt")
                         .setCancelable(true)
                         .setNegativeButton("Импорт", new DialogInterface.OnClickListener() {
                             @Override
@@ -158,34 +167,14 @@ public class DocumentActivity extends AppCompatActivity {
                                 loadDocWithGoods();
                                 Toast.makeText(c, "Ок", Toast.LENGTH_SHORT).show();
                             }
-                        }).setPositiveButton("Экспорт", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                            new ExportDifference().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                        } else {
-                            new ExportDifference().execute();
-                        }
-
                     }
-                });
-
+                );
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
-
                 return true;
             }
         });
 
-        viewDocBarcodesDiff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("difference", "true");
-                documentDifferrence.putExtras(bundle);
-                startActivity(documentDifferrence);
-            }
-        });
 
 
         viewDBBarcodes.setOnClickListener(new View.OnClickListener() {
@@ -199,27 +188,15 @@ public class DocumentActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(DocumentActivity.this);
-                builder.setTitle("Импорт / Экспорт")
-                        .setMessage("Выбирите функцию")
+                builder.setTitle("Импорт")
+                        .setMessage("Импорт товаров в базу из файла goodsimport.txt")
                         .setCancelable(true)
                         .setNegativeButton("Импорт", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Toast.makeText(c, "Импортирую", Toast.LENGTH_SHORT).show();
                                 loadBarcodes();
-                                Toast.makeText(c, "Ок", Toast.LENGTH_SHORT).show();
                             }
-                        }).setPositiveButton("Экспорт", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                            new ExportDifference().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                        } else {
-                            new ExportDifference().execute();
-                        }
-
-                    }
-                });
+                        });
 
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
@@ -283,30 +260,10 @@ public class DocumentActivity extends AppCompatActivity {
         });
     }
 
-    public void loadCSV() {
-        File file = new File(Environment.getExternalStorageDirectory(), "Goods.txt");
-        CsvReader csvReader = new CsvReader();
-        csvReader.setFieldSeparator(';');
-
-
-        CsvContainer csv = null;
-        try {
-            csv = csvReader.read(file, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        if (csv != null) {
-            for (CsvRow row : csv.getRows()) {
-                System.out.println(row);
-                docGoods = new DocGoods(String.valueOf(row.getField(0)),
-                        String.valueOf(row.getField(1)),
-                        String.valueOf(row.getField(2)),
-                        String.valueOf(row.getField(3)));
-
-                documentsDatabase.docGoodsDao().insertGoods(docGoods);
-
-            }
-        }
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
     }
 
     public void loadDocWithGoods() {
@@ -350,7 +307,7 @@ public class DocumentActivity extends AppCompatActivity {
                 quantity.setText(String.format("Введено: %s", query_fetch.get(0).qty));
                 inpackUchet.setText(String.format("Упак | Учёт: %s / %s", query_fetch.get(0).inpack, query_fetch.get(0).qtypredict));
 
-                documentsDatabase.docBodyDao().updateQuantity(query_fetch.get(0).barcode, numberPicker.getValue());
+                documentsDatabase.docBodyDao().updateQuantity(query_fetch.get(0).barcode, numberPicker.getValue(), _TempDocumentString);
                 FancyToast.makeText(c, "Добавленно", FancyToast.LENGTH_SHORT, FancyToast.SUCCESS, false).show();
                 query_fetch.clear();
                 query_fetch = documentsDatabase.docBodyDao().getGoodsByBarcode(barcode.getText().toString(), _TempDocumentString);
@@ -376,57 +333,8 @@ public class DocumentActivity extends AppCompatActivity {
 
     }
 
-    public class ExportDifference extends AsyncTask<String, Void, Boolean> {
-        ProgressDialog dialog = new ProgressDialog(DocumentActivity.this);
-
-        @Override
-        protected void onPreExecute() {
-            this.dialog.setMessage("Exporting");
-            this.dialog.show();
-        }
-
-        @Override
-        protected Boolean doInBackground(final String... args) {
-
-            File file = new File(Environment.getExternalStorageDirectory(), "Users1.csv");
-            try {
-                file.createNewFile();
-                CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
-                String[] column = {"docnumber", "code", "barcode", "inpack", "qty", "qtypredict"};
-                csvWrite.writeNext(column);
-
-                List<DocBody> docbody = documentsDatabase.docBodyDao().getDocBodyListDifference();
-                for (int i = 0; i < docbody.size(); i++) {
-                    String[] mySecondStringArray = {
-                            docbody.get(i).docnumber,
-                            docbody.get(i).code,
-                            docbody.get(i).barcode,
-                            docbody.get(i).inpack,
-                            String.valueOf(docbody.get(i).qty),
-                            String.valueOf(docbody.get(i).qtypredict)
-                    };
-                    csvWrite.writeNext(mySecondStringArray);
-                }
-                csvWrite.close();
-                return true;
-            } catch (IOException e) {
-                System.out.println(e);
-                return false;
-            }
-        }
-        protected void onPostExecute(final Boolean success) {
-            if (this.dialog.isShowing()) {
-                this.dialog.dismiss(); }
-            if (success) {
-                Toast.makeText(c, "Экспортирование завершенно", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(c, "Ошибка экспорта", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
     public void loadBarcodes() {
-        File file = new File(Environment.getExternalStorageDirectory(), "docs.txt");
+        File file = new File(Environment.getExternalStorageDirectory(), "goodsimport.txt");
         CsvReader csvReader = new CsvReader();
         csvReader.setFieldSeparator(';');
         CsvContainer csv = null;
@@ -449,7 +357,3 @@ public class DocumentActivity extends AppCompatActivity {
         Toast.makeText(c, "Импортирование завершенно", Toast.LENGTH_SHORT).show();
     }
 }
-
-
-
-

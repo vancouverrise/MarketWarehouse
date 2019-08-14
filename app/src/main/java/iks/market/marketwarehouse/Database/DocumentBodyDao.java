@@ -12,8 +12,8 @@ import java.util.List;
 public interface DocumentBodyDao {
     @Query("Select * from DocBody")
     List<DocBody> getDocBodyList();
-    @Query("Select * from DocBody WHERE qty != qtypredict")
-    List<DocBody> getDocBodyListDifference();
+    @Query("Select * from DocBody WHERE docnumber LIKE :id AND qty != qtypredict")
+    List<DocBody> getDocBodyListDifference(String id);
     @Query("SELECT * FROM DocBody WHERE docnumber LIKE :id")
     List<DocBody> getBodyByNumber(String id);
     @Query("SELECT * FROM DocBody WHERE barcode LIKE :barcode AND docnumber LIKE :number")
@@ -26,8 +26,8 @@ public interface DocumentBodyDao {
     void updateDocuments(DocBody docBody);
     @Delete
     void deleteDocuments(DocBody docBody);
-    @Query("UPDATE DocBody SET qty=qty+ :number WHERE barcode LIKE :barcode")
-    void updateQuantity(String barcode, int number);
+    @Query("UPDATE DocBody SET qty=qty+ :number WHERE barcode LIKE :barcode AND docnumber LIKE :docnumber")
+    void updateQuantity(String barcode, int number, String docnumber);
 
 
 }
