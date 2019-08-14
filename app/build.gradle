@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion '29.0.0'
+    buildToolsVersion '29.0.2'
     defaultConfig {
         applicationId "iks.market.marketwarehouse"
-        minSdkVersion 23
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -34,5 +34,7 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
     implementation 'de.siegmar:fastcsv:1.0.3'
     implementation 'com.github.Shashank02051997:FancyToast-Android:0.1.6'
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
 
 }
