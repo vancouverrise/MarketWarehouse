@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.shashank.sony.fancytoastlib.FancyToast;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -60,6 +62,7 @@ public class SplashActivity extends AppCompatActivity {
            }
            readLicenceFile();
            if (licence.equals(stringBuilder.toString())) {
+               FancyToast.makeText(this,"Лицензия активна",FancyToast.LENGTH_LONG,FancyToast.SUCCESS,false).show();
                System.out.println("LICENCE ACCEPTED");
                handler = new Handler();
                long timer = 2500;
@@ -74,6 +77,7 @@ public class SplashActivity extends AppCompatActivity {
 
            } else {
                System.out.println("LICENCE NOT ACCEPTED ");
+               FancyToast.makeText(this,"Лицензия не найдена",FancyToast.LENGTH_LONG,FancyToast.ERROR,false);
                AlertDialog.Builder builder = new AlertDialog.Builder(this);
                builder.setTitle("Внимание").setMessage("Лицензия не найдена").setPositiveButton("ОК", new DialogInterface.OnClickListener() {
                    @Override
@@ -85,8 +89,7 @@ public class SplashActivity extends AppCompatActivity {
                alertDialog.show();
 
            }
-    }
-
+        }
 
       public String encode (String serial){
         int temp = Integer.valueOf(serial.substring(5, 9));

@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.io.File;
@@ -35,7 +36,7 @@ import iks.market.marketwarehouse.Views.DocumentsListModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button buttonAdd;
+
     RecyclerView recyclerView;
     DocumentsListAdapter documentsListAdapter;
     Context context;
@@ -47,17 +48,18 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> adapterCode;
     EditText editText, editText2;
     AutoCompleteTextView   editText3, editText4;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.newmainwindow);
+        fab = findViewById(R.id.fab);
         adapterName = new ArrayAdapter<>(this, android.R.layout.select_dialog_item);
         adapterCode = new ArrayAdapter<>(this, android.R.layout.select_dialog_item);
 
-        recyclerView = findViewById(R.id.recycler);
-        buttonAdd = findViewById(R.id.buttonAdd);
+        recyclerView = findViewById(R.id.recyclermaterial);
+
         context = this.getApplicationContext();
 
         documentsDatabase = DocumentsDatabase.getInstance(this);
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ShowDialog();
@@ -116,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                importPartners();
+                //importPartners();
                 dialogBuilder.dismiss();
             }
         });

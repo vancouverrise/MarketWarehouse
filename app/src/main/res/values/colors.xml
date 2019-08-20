@@ -2,5 +2,8 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#F9AA33</color>
+    <color name="bottombar">#067CC0</color>
+    <color name="fabcolor">#F9AA33</color>
+    <color name="backcolor">#FFFFFF</color>
 </resources>

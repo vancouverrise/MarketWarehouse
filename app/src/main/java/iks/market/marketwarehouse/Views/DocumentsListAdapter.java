@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,7 @@ public class DocumentsListAdapter extends RecyclerView.Adapter<DocumentsListHold
     @Override
     public void onBindViewHolder(@NonNull final DocumentsListHolder holder, final int position) {
         holder.title.setText(stuff.get(position).getTitle());
+        holder.title.setTextColor(Color.BLACK);
         holder.description.setText(stuff.get(position).getDescription());
         holder.vendorId.setText(stuff.get(position).getVendoirId());
         holder.vendorCode.setText(stuff.get(position).getVendorName());

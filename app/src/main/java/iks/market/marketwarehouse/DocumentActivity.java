@@ -175,7 +175,12 @@ public class DocumentActivity extends AppCompatActivity {
             }
         });
 
-
+        end.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         viewDBBarcodes.setOnClickListener(new View.OnClickListener() {
             @Override
