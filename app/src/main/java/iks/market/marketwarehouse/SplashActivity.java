@@ -83,6 +83,7 @@ public class SplashActivity extends AppCompatActivity {
                });
                AlertDialog alertDialog = builder.create();
                alertDialog.show();
+
            }
     }
 
@@ -115,8 +116,7 @@ public class SplashActivity extends AppCompatActivity {
         }
         catch (IOException e) {
 
-        }
-return true;
+        }return true;
     }
 
    public boolean checkAndRequestPermissions()

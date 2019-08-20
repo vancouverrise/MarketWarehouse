@@ -24,4 +24,5 @@ public abstract class DocumentsDatabase extends RoomDatabase {
     public abstract DocumentBodyDao docBodyDao();
     public abstract DocPartnersDao partnersDao();
     public abstract DocGoodsDao docGoodsDao();
+
 }

@@ -36,6 +36,7 @@ public class  GoodsWatchActivity extends AppCompatActivity {
         recyclerGoods.setLayoutManager(new LinearLayoutManager(this));
         goodsListAdapter = new GoodsListAdapter(this, getGoods());
         recyclerGoods.setAdapter(goodsListAdapter);
+        
     }
 
     private ArrayList<GoodsListModel> getGoods() {

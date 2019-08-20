@@ -22,12 +22,21 @@ public interface DocumentBodyDao {
     List<DocBody> getGoodsByArticle(String article);
     @Insert
     void insertDocuments(DocBody docBody);
+
     @Update
     void updateDocuments(DocBody docBody);
     @Delete
     void deleteDocuments(DocBody docBody);
     @Query("UPDATE DocBody SET qty=qty+ :number WHERE barcode LIKE :barcode AND docnumber LIKE :docnumber")
     void updateQuantity(String barcode, int number, String docnumber);
+    @Query("UPDATE DocBody SET qty=qty+ :number WHERE barcode LIKE :barcode AND docnumber LIKE :doc")
+    void updateSomething(String barcode, int number, String doc);
+
+
+
+
+
+
 
 
 }

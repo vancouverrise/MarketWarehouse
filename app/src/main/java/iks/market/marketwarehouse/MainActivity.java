@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayAdapter<String> adapterCode;
     EditText editText, editText2;
     AutoCompleteTextView   editText3, editText4;
-    String licence;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,12 +106,12 @@ public class MainActivity extends AppCompatActivity {
         LayoutInflater inflater = this.getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.addnewdocument, null);
 
-        editText = dialogView.findViewById(R.id.edt_comment);
-        editText2 = dialogView.findViewById(R.id.descriptionEditText);
-        editText3 = dialogView.findViewById(R.id.codeSupplierEditText);
-        editText4 = dialogView.findViewById(R.id.nameSupplierTextView);
-        Button button1 = dialogView.findViewById(R.id.buttonSubmit);
-        Button button2 = dialogView.findViewById(R.id.buttonCancel);
+        editText        = dialogView.findViewById(R.id.edt_comment);
+        editText2       = dialogView.findViewById(R.id.descriptionEditText);
+        editText3       = dialogView.findViewById(R.id.codeSupplierEditText);
+        editText4       = dialogView.findViewById(R.id.nameSupplierTextView);
+        Button button1  = dialogView.findViewById(R.id.buttonSubmit);
+        Button button2  = dialogView.findViewById(R.id.buttonCancel);
 
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +142,6 @@ public class MainActivity extends AppCompatActivity {
         editText4.setAdapter(adapterName);
         dialogBuilder.setView(dialogView);
         dialogBuilder.show();
-
     }
 
     public void importPartners() {
@@ -165,21 +164,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         Toast.makeText(MainActivity.this, "Импортирование завершенно", Toast.LENGTH_SHORT).show();
-        
     }
 
     public void adapter(){
         documentsDatabase.docHeaderDao().getDocumentsHeaderList();
         documentsListAdapter = new DocumentsListAdapter(this, getAnotherStuff());
         recyclerView.setAdapter(documentsListAdapter);
-    }
-
-   /* public int encode (String serial){
-        int temp = Integer.valueOf(serial.substring(5, 9));
-        return (temp +131) * 2781;
-    }*/
-
-    public String receivedLicence(int a){
-        return null;
     }
 }
